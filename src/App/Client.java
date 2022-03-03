@@ -29,25 +29,17 @@ public class Client {
             bufferedWriter.newLine();
             bufferedWriter.flush();
 
-            String[] words;
             Scanner scanner = new Scanner(System.in);
             while (socket.isConnected()) {
                 String message = scanner.nextLine();
                 if (message.startsWith("@")) {
-                    words = message.split(" ");
-                    String targetClientName = words[0].substring(1);
-                    message = message.substring(words[0].length()+2);
-
-
-
-                    bufferedWriter.write(username + " uploaded a file.");
-                    bufferedWriter.newLine();
-                    bufferedWriter.flush();
-                } else {
-                    bufferedWriter.write(username + ": " + message);
-                    bufferedWriter.newLine();
-                    bufferedWriter.flush();
+                    bufferedWriter.write(message + " " + username);
                 }
+                else{
+                    bufferedWriter.write(username + ": " + message);
+                }
+                bufferedWriter.newLine();
+                bufferedWriter.flush();
             }
         } catch (IOException e) {
             closeEverything(socket, bufferedReader, bufferedWriter);
